@@ -1,11 +1,12 @@
 estudiantes = []
 
-class estudiante:
-    def __init__(self, nombre, edad, grado, id):
+class Estudiante:
+    def __init__(self, nombre, edad, grado, id, materias):
         self.nombre = nombre
         self.edad = edad
         self.grado = grado
         self.id = id
+        self.materias = materias
 
 def aggestudiante():
     nombre = input("Ingrese el nombre completo del estudiante: ")
@@ -25,34 +26,37 @@ def aggestudiante():
         promedio = sum(notas) / len(notas)
         materias[materia] = {"notas": notas, "promedio": promedio}
     
-    estudiante = {"nombre": nombre, "edad": edad, "grado": grado, "id": id, "materias": materias}
-    estudiantes.append(estudiante)
+    est = Estudiante(nombre, edad, grado, id, materias)
+    estudiantes.append(est)
 
 def mejormateria(estudiante):
     mejormateria = None
     mejorpromedio = 0
-    for materia in estudiante["materias"]:
-        if estudiante["materias"][materia]["promedio"] > mejorpromedio:
+    for materia, datos in estudiante.materias.items():
+        if datos["promedio"] > mejorpromedio:
             mejormateria = materia
-            mejorpromedio = estudiante["materias"][materia]["promedio"]
-    print(f"La mejor materia de {estudiante['nombre']} es {mejormateria} con un promedio de {mejorpromedio:.2f}")
+            mejorpromedio = datos["promedio"]
+    print(f"La mejor materia de {estudiante.nombre} es {mejormateria} con un promedio de {mejorpromedio:.2f}")
 
 def buscarestudiante(nombre):
     for estudiante in estudiantes:
-        if estudiante["nombre"] == nombre:
+        if estudiante.nombre == nombre:
             return estudiante
     return None
 
-def mostrarestudiantes():
+def mostrarestudiantes(ordenar=False):
+    if ordenar:
+        combsort(estudiantes)
+
     print("Lista de estudiantes:")
     for estudiante in estudiantes:
-        print(f"Nombre: {estudiante['nombre']}")
-        print(f"Edad: {estudiante['edad']}")
-        print(f"Grado: {estudiante['grado']}")
-        print(f"Identificación: {estudiante['id']}")
+        print(f"Nombre: {estudiante.nombre}")
+        print(f"Edad: {estudiante.edad}")
+        print(f"Grado: {estudiante.grado}")
+        print(f"Identificación: {estudiante.id}")
         print("Materias:")
-        for materia in estudiante['materias']:
-            print(f"  {materia}: {estudiante['materias'][materia]['promedio']:.2f}")
+        for materia, datos in estudiante.materias.items():
+            print(f"  {materia}: {datos['promedio']:.2f}")
     print("-" * 40)
 
 def combsort(estudiantes):
@@ -68,7 +72,7 @@ def combsort(estudiantes):
 
         i = 0
         while i + gap < len(estudiantes):
-            if estudiantes[i]['edad'] > estudiantes[i + gap]['edad']:
+            if estudiantes[i].edad > estudiantes[i + gap].edad:
                 estudiantes[i], estudiantes[i + gap] = estudiantes[i + gap], estudiantes[i]
                 sorted = False
             i += 1
@@ -76,7 +80,7 @@ def combsort(estudiantes):
 def eliminarestudiante():
     id_estudiante = int(input("Ingrese el ID del estudiante a eliminar: "))
     for estudiante in estudiantes:
-        if estudiante["id"] == id_estudiante:
+        if estudiante.id == id_estudiante:
             estudiantes.remove(estudiante)
             print(f"Estudiante con ID {id_estudiante} eliminado con éxito.")
             return
@@ -100,13 +104,8 @@ while True:
         else:
             print("Estudiante no encontrado.")
     elif opcion == "3":
-        print("ESTUDIANTES")
-        mostrarestudiantes()
-        combsort(estudiantes)
         print("ESTUDIANTES ORDENADOS POR EDAD:")
-        for estudiante in estudiantes:
-            print(f"Nombre: {estudiante['nombre']}, Edad: {estudiante['edad']}")
-        print("-" * 40)
+        mostrarestudiantes(ordenar=True)
     elif opcion == "4":
         eliminarestudiante()
     elif opcion == "5":
@@ -114,4 +113,3 @@ while True:
         break
     else:
         print("Opción inválida.")
-

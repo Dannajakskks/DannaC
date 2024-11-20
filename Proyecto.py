@@ -60,12 +60,23 @@ def combsort(estudiantes):
                 estudiantes[i], estudiantes[i + gap] = estudiantes[i + gap], estudiantes[i]
                 sorted = False
             i += 1
+        
+def eliminarest(estudiantes):
+    nombre = input("Ingrese el nombre completo del estudiante a eliminar: ")
+    for estudiante in estudiantes:
+        if estudiante["nombre"] == nombre:
+            estudiantes.remove(estudiante)
+            print("Estudiante eliminado con éxito.")
+            return
+    print("Estudiante no encontrado/a.")
+
 
 while True:
     print("1. Agregar estudiante")
     print("2. Buscar estudiante")
     print("3. Mostrar todos los estudiantes")
-    print("4. Salir")
+    print("4. Eliminar estudiante")
+    print("5. Salir")
     opcion = input("Elija una opción: ")
 
     if opcion == "1":
@@ -85,6 +96,8 @@ while True:
         for estudiante in estudiantes:
             print(f"Nombre: {estudiante['nombre']}, {estudiante['edad']}")
     elif opcion == "4":
+        eliminarest()
+    elif opcion == "5":
         break
     else:
         print("Opción inválida.")

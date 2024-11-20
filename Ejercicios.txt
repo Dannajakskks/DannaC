@@ -71,8 +71,10 @@ def inventario(productos):
     else:
         print("\nLista de productos:")
         for producto in productos:
-            print(f"Nombre: {producto['nombre']}, Precio: {producto['preciount']}, Cantidad: {producto['cant']}")
-    
+            print(f"Nombre: {producto['nombre']})
+            print(f"Precio: {producto['preciount']})
+            print(f"Cantidad: {producto['cant']})
+            print(f"Precio total: {producto['cant*preciount']})
     
 def eliminar(productos):
     prod_eli = input("Ingrese el nombre del producto a eliminar: ")

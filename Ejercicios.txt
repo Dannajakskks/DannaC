@@ -53,4 +53,47 @@ while True:
 #Ejercicio 2
 #Inventario de productos
 
-def opciones    
+def opciones():
+    print("¿Que desea realizar?")
+    print("1. Agregar producto")
+    print("2. Inventario")
+    print("3. Eliminar producto")
+    print("4. Salir")
+    
+def aggproducto(productos):
+    nombre = input("Nombre del producto: ")
+    preciount = input("Precio del producto: ")
+    cant = input("Ingrese la cantidad: ")
+    
+def inventario(productos):
+    if not productos:
+        print("La lista de productos está vacía.")
+    else:
+        print("\nLista de productos:")
+        for producto in productos:
+            print(f"Nombre: {producto['nombre']}, Precio: {producto['preciount']}, Cantidad: {producto['cant']}")
+    
+    
+def eliminar(productos):
+    prod_eli = input("Ingrese el nombre del producto a eliminar: ")
+    for p in productos:
+            if prod_eli["nombre"] == prod_eli:
+                productos.remove(p)
+            print("Producto eliminado con éxito.")
+            return
+    print("Producto no encontrado.")
+    
+productos = []
+while True:
+    opcion = opciones()
+    if opcion == 1:
+        aggproducto(productos)
+    elif opcion == 2:
+        inventario(productos)
+    elif opcion == 3:
+        eliminar(productos)
+    elif opcion == 4:
+        print("Saliste.")
+        break
+    else:
+        print("Opción no válida.")
